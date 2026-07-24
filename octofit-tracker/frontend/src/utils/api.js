@@ -7,12 +7,13 @@ export function getApiBaseUrl() {
     const protocol = window.location.protocol || 'http:';
 
     if (hostname.includes('app.github.dev')) {
-      if (hostname.includes('-5173.')) {
-        return `${protocol}//${hostname.replace('-5173.', '-8000.')}`;
-      }
-
       if (hostname.includes('-8000.')) {
         return `${protocol}//${hostname}`;
+      }
+
+      const codespaceHostname = hostname.replace(/-\d+\.app\.github\.dev$/, '-8000.app.github.dev');
+      if (codespaceHostname !== hostname) {
+        return `${protocol}//${codespaceHostname}`;
       }
     }
 
